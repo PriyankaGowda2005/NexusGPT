@@ -1,15 +1,17 @@
-# SigmaGPT
+# NexusGPT
 
-A MERN stack-based ChatGPT replica implemented from scratch using OpenAI API. This application provides a chat interface similar to ChatGPT with thread management, message history, and persistent storage.
+A modern MERN stack-based ChatGPT replica implemented from scratch using OpenAI API. This application provides a beautiful, responsive chat interface similar to ChatGPT with thread management, message history, and persistent storage.
 
 ## 🚀 Features
 
 - **Real-time Chat Interface**: Interactive chat experience powered by OpenAI's GPT-4o-mini model
 - **Thread Management**: Create, view, and delete multiple conversation threads
 - **Message History**: Persistent storage of all conversations in MongoDB
-- **Modern UI**: Clean and responsive React-based user interface
-- **Sidebar Navigation**: Easy access to previous chat threads
+- **Modern UI/UX**: Beautiful, responsive React-based user interface with smooth animations
+- **Responsive Design**: Fully responsive design that works seamlessly on desktop, tablet, and mobile devices
+- **Sidebar Navigation**: Easy access to previous chat threads with mobile-friendly menu
 - **Markdown Support**: Formatted responses with syntax highlighting
+- **Dark Theme**: Modern dark theme with gradient accents and glassmorphism effects
 
 ## 🛠️ Tech Stack
 
@@ -20,6 +22,7 @@ A MERN stack-based ChatGPT replica implemented from scratch using OpenAI API. Th
 - **React Markdown** - Markdown rendering
 - **Rehype Highlight** - Code syntax highlighting
 - **React Spinners** - Loading indicators
+- **Inter Font** - Modern typography
 
 ### Backend
 
@@ -42,10 +45,11 @@ Before you begin, ensure you have the following installed:
 
 ## 📦 Installation
 
-1. **Clone the repository** (if applicable) or navigate to the project directory:
+1. **Clone the repository**:
 
    ```bash
-   cd SigmaGPT
+   git clone https://github.com/PriyankaGowda2005/NexusGPT.git
+   cd NexusGPT
    ```
 
 2. **Install Backend Dependencies**:
@@ -56,6 +60,7 @@ Before you begin, ensure you have the following installed:
    ```
 
 3. **Install Frontend Dependencies**:
+
    ```bash
    cd ../Frontend
    npm install
@@ -70,6 +75,12 @@ Before you begin, ensure you have the following installed:
    touch .env
    ```
 
+   On Windows:
+   ```bash
+   cd Backend
+   type nul > .env
+   ```
+
 2. **Add the following environment variables** to `Backend/.env`:
 
    ```env
@@ -80,13 +91,13 @@ Before you begin, ensure you have the following installed:
    **Example for MongoDB Atlas:**
 
    ```env
-   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/sigmagpt?retryWrites=true&w=majority
+   MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/nexusgpt?retryWrites=true&w=majority
    ```
 
    **Example for Local MongoDB:**
 
    ```env
-   MONGODB_URI=mongodb://localhost:27017/sigmagpt
+   MONGODB_URI=mongodb://localhost:27017/nexusgpt
    ```
 
    **OpenAI API Key:**
@@ -102,7 +113,7 @@ You need to run both the backend and frontend servers. Open two separate termina
 ### Terminal 1 - Backend Server
 
 ```bash
-cd SigmaGPT/Backend
+cd NexusGPT/Backend
 node server.js
 ```
 
@@ -111,14 +122,14 @@ The backend server will start on **http://localhost:8080**
 **Alternative:** If you want auto-reload on file changes, you can use nodemon:
 
 ```bash
-cd SigmaGPT/Backend
+cd NexusGPT/Backend
 npx nodemon server.js
 ```
 
 ### Terminal 2 - Frontend Server
 
 ```bash
-cd SigmaGPT/Frontend
+cd NexusGPT/Frontend
 npm run dev
 ```
 
@@ -135,7 +146,7 @@ http://localhost:5173
 ## 📁 Project Structure
 
 ```
-SigmaGPT/
+NexusGPT/
 ├── Backend/
 │   ├── models/
 │   │   └── Thread.js          # MongoDB schema for threads and messages
@@ -151,8 +162,9 @@ SigmaGPT/
 │   ├── src/
 │   │   ├── App.jsx            # Main app component
 │   │   ├── ChatWindow.jsx     # Chat interface component
+│   │   ├── Chat.jsx           # Chat messages component
 │   │   ├── Sidebar.jsx        # Sidebar with thread list
-│   │   ├── MyContext.jsx      # React context for state management
+│   │   ├── MyContext.jsx     # React context for state management
 │   │   └── assets/            # Images and static assets
 │   ├── public/
 │   ├── package.json
@@ -192,6 +204,16 @@ Content-Type: application/json
 GET http://localhost:8080/api/thread
 ```
 
+## 🎨 UI/UX Features
+
+- **Modern Design System**: Consistent color palette with CSS variables
+- **Smooth Animations**: Transitions and hover effects throughout
+- **Gradient Accents**: Beautiful indigo/purple gradient theme
+- **Glassmorphism**: Modern blur effects and transparency
+- **Responsive Layout**: Mobile-first design with breakpoints for tablet and desktop
+- **Custom Scrollbars**: Styled scrollbars matching the theme
+- **Loading States**: Beautiful loading indicators with animations
+
 ## 🐛 Troubleshooting
 
 ### Backend Issues
@@ -219,8 +241,12 @@ GET http://localhost:8080/api/thread
    - Verify API endpoint URLs in frontend code
 
 2. **Build Errors**
-   - Delete `node_modules` and reinstall: `rm -rf node_modules && npm install`
+   - Delete `node_modules` and reinstall: `rm -rf node_modules && npm install` (Linux/Mac) or `rmdir /s node_modules && npm install` (Windows)
    - Clear npm cache: `npm cache clean --force`
+
+3. **Text Not Visible in Input**
+   - Clear browser cache and reload
+   - Check if CSS variables are loading correctly
 
 ## 📝 Available Scripts
 
@@ -236,6 +262,14 @@ GET http://localhost:8080/api/thread
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
 
+## 📱 Responsive Design
+
+The application is fully responsive and optimized for:
+
+- **Desktop**: Full-width layout with sidebar always visible
+- **Tablet** (768px - 1024px): Adjusted spacing and font sizes
+- **Mobile** (< 768px): Collapsible sidebar with overlay, touch-friendly interface
+
 ## 🔒 Security Notes
 
 - **Never commit** your `.env` file to version control
@@ -250,6 +284,10 @@ This project is open source and available for personal and educational use.
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
+
+## 🔗 Repository
+
+[GitHub Repository](https://github.com/PriyankaGowda2005/NexusGPT)
 
 ---
 
