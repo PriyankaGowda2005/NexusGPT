@@ -4,7 +4,7 @@ import { MyContext } from "./MyContext.jsx";
 import {v1 as uuidv1} from "uuid";
 
 function Sidebar() {
-    const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
+    const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats, sidebarOpen, setSidebarOpen} = useContext(MyContext);
 
     const getAllThreads = async () => {
         try {
@@ -29,6 +29,7 @@ function Sidebar() {
         setReply(null);
         setCurrThreadId(uuidv1());
         setPrevChats([]);
+        setSidebarOpen(false); // Close sidebar on mobile after creating new chat
     }
 
     const changeThread = async (newThreadId) => {
@@ -41,6 +42,7 @@ function Sidebar() {
             setPrevChats(res);
             setNewChat(false);
             setReply(null);
+            setSidebarOpen(false); // Close sidebar on mobile after selecting thread
         } catch(err) {
             console.log(err);
         }
@@ -65,10 +67,18 @@ function Sidebar() {
     }
 
     return (
-        <section className="sidebar">
-            <button onClick={createNewChat}>
-                <img src="src/assets/blacklogo.png" alt="gpt logo" className="logo"></img>
-                <span><i className="fa-solid fa-pen-to-square"></i></span>
+        <>
+            {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}></div>}
+            <section className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+                <button className="close-sidebar-btn" onClick={() => setSidebarOpen(false)}>
+                    <i className="fa-solid fa-times"></i>
+                </button>
+                <button onClick={createNewChat}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <img src="src/assets/blacklogo.png" alt="gpt logo" className="logo"></img>
+                    <span style={{ fontSize: '15px', fontWeight: '600' }}>New Chat</span>
+                </div>
+                <span><i className="fa-solid fa-plus"></i></span>
             </button>
 
 
@@ -79,7 +89,7 @@ function Sidebar() {
                             onClick={(e) => changeThread(thread.threadId)}
                             className={thread.threadId === currThreadId ? "highlighted": " "}
                         >
-                            {thread.title}
+                            <span title={thread.title}>{thread.title}</span>
                             <i className="fa-solid fa-trash"
                                 onClick={(e) => {
                                     e.stopPropagation(); //stop event bubbling
@@ -92,9 +102,13 @@ function Sidebar() {
             </ul>
  
             <div className="sign">
-                <p>By ApnaCollege &hearts;</p>
+                <p style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                    <i className="fa-solid fa-heart" style={{ color: '#ef4444', fontSize: '10px' }}></i>
+                    Made with love
+                </p>
             </div>
         </section>
+        </>
     )
 }
 

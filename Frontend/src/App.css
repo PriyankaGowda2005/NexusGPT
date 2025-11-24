@@ -1,14 +1,21 @@
-* {
-    color: #ececec;
-    font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-}
-
 .app {
-    background-color: #212121;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #1a1a2e 100%);
     display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .app {
+        overflow-x: hidden;
+    }
 }

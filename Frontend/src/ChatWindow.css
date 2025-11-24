@@ -1,125 +1,401 @@
 .chatWindow {
-    background-color: #212121;
+    background: var(--bg-primary);
     height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
 
-/* navbar */
-
+/* Navbar */
 .navbar {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 16px 24px;
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar span {
-    margin: 1rem 2rem;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.navbar span i {
+    font-size: 12px;
+    opacity: 0.7;
+    -webkit-text-fill-color: var(--text-secondary);
 }
 
 .userIconDiv {
-    margin: 1rem 2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.userIconDiv:hover {
+    transform: scale(1.1);
 }
 
 .userIcon {
-    background-color: #339cff;
-    height: 25px;
-    width: 25px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    height: 36px;
+    width: 36px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
 }
 
-/* chat input */
+.userIcon:hover {
+    box-shadow: var(--shadow-lg), var(--shadow-glow);
+    transform: scale(1.05);
+}
+
+.userIcon i {
+    color: var(--text-primary);
+    font-size: 16px;
+}
+
+/* Dropdown */
+.dropDown {
+    position: absolute;
+    top: 70px;
+    right: 24px;
+    width: 200px;
+    background: var(--bg-tertiary);
+    padding: 8px;
+    border-radius: 12px;
+    text-align: left;
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dropDownItem {
+    font-size: 14px;
+    margin: 4px 0;
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.dropDownItem i {
+    width: 16px;
+    font-size: 14px;
+}
+
+.dropDownItem:hover {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    transform: translateX(4px);
+}
+
+/* Chat Input */
 .chatInput {
     width: 100%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 20px 24px;
+    background: rgba(15, 15, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-color);
 }
 
 .inputBox {
     width: 100%;
     position: relative;
-    max-width: 700px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 12px;
 }
 
-input {
+.inputBox input,
+.chatInput input,
+input[type="text"] {
     width: 100%;
-    border: none;
-    background-color: rgba(255, 255, 255, 0.05);
-    padding: 20px;
-    font-size: 0.8rem;
-    border-radius: 14px;
-    box-shadow: rgba(0, 0, 0, 0.05) 0 54px 55px,
-                rgba(0, 0, 0, 0.05) 0 -12px 30px,
-                rgba(0, 0, 0, 0.05) 0 4px 6px,
-                rgba(0, 0, 0, 0.05) 0 12px 3px,
-                rgba(0, 0, 0, 0.05) 0 -3px 5px;
+    border: 1.5px solid var(--border-color);
+    background: var(--bg-secondary);
+    padding: 16px 50px 16px 20px;
+    font-size: 15px;
+    border-radius: 24px;
+    color: #ffffff !important;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.inputBox input::placeholder,
+.chatInput input::placeholder,
+input[type="text"]::placeholder {
+    color: var(--text-tertiary);
+    opacity: 0.7;
+}
+
+.inputBox input:not(:placeholder-shown),
+.chatInput input:not(:placeholder-shown),
+input[type="text"]:not(:placeholder-shown) {
+    color: #ffffff !important;
+}
+
+.inputBox input:-webkit-autofill,
+.inputBox input:-webkit-autofill:hover,
+.inputBox input:-webkit-autofill:focus,
+.chatInput input:-webkit-autofill,
+.chatInput input:-webkit-autofill:hover,
+.chatInput input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-secondary) inset;
+    box-shadow: 0 0 0px 1000px var(--bg-secondary) inset;
+    color: #ffffff !important;
 }
 
 input:focus {
     outline: none;
+    border-color: var(--accent-primary);
+    background: var(--bg-tertiary);
+    box-shadow: var(--shadow-md), 0 0 0 3px rgba(99, 102, 241, 0.1);
+    transform: translateY(-1px);
 }
 
 #submit {
     cursor: pointer;
-    height: 35px;
-    width: 35px;
-    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    font-size: 16px;
     position: absolute;
-    right: 15px;
+    right: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    border-radius: 50%;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
 }
 
-#submit i:hover {
-    color: #fff;
+#submit:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+}
+
+#submit:active {
+    transform: scale(0.95);
+}
+
+#submit i {
+    color: var(--text-primary);
 }
 
 .info {
-    font-size: 0.8rem;
-    padding: 0.5rem;
-    color: #b4b4b4;
+    font-size: 12px;
+    padding: 0;
+    color: var(--text-tertiary);
+    text-align: center;
+    line-height: 1.5;
 }
 
-/* dropdown css */
-
-.dropDown {
+/* Loading spinner */
+.chatWindow > div:has(> .spinner) {
     position: absolute;
-    top: 4rem;
-    right: 4rem;
-    width: 150px;
-
-    background-color: #323232;
-    padding: 0.3rem 0.5rem;
-    border-radius: 6px;
-    text-align: left;
-    z-index: 1000;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 50;
 }
 
-.dropDownItem {
-    font-size: 0.9rem;
-    margin: 0.3rem 0rem;
-    padding: 0.5rem 0.2rem;
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 20px;
     cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
+.mobile-menu-btn:hover {
+    background: var(--bg-hover);
+}
 
-.dropDownItem:hover {
-    background-color: rgba(180, 180, 180, 0.1);
-    border-radius: 6px;
+/* Tablet Design */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .navbar {
+        padding: 14px 20px;
+    }
+
+    .chatInput {
+        padding: 18px 20px;
+        max-width: 90%;
+    }
+
+    input {
+        padding: 15px 48px 15px 18px;
+        font-size: 14px;
+        color: #ffffff !important;
+    }
+
+    .dropDown {
+        width: 190px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .navbar {
+        padding: 12px 16px;
+    }
+
+    .navbar span {
+        font-size: 15px;
+    }
+
+    .chatInput {
+        padding: 16px 16px;
+        max-width: 100%;
+    }
+
+    .inputBox {
+        margin-bottom: 10px;
+    }
+
+    input {
+        padding: 14px 45px 14px 16px;
+        font-size: 14px;
+        color: #ffffff !important;
+    }
+
+    #submit {
+        height: 36px;
+        width: 36px;
+        font-size: 14px;
+        right: 6px;
+    }
+
+    .info {
+        font-size: 11px;
+        padding: 0 8px;
+    }
+
+    .dropDown {
+        right: 16px;
+        width: 180px;
+        top: 65px;
+    }
+
+    .dropDownItem {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px 12px;
+    }
+
+    .navbar span {
+        font-size: 14px;
+    }
+
+    .navbar span i {
+        font-size: 16px;
+    }
+
+    .mobile-menu-btn {
+        font-size: 18px;
+        padding: 6px;
+    }
+
+    .userIcon {
+        height: 32px;
+        width: 32px;
+    }
+
+    .userIcon i {
+        font-size: 14px;
+    }
+
+    .chatInput {
+        padding: 12px 12px;
+    }
+
+    input {
+        padding: 12px 40px 12px 14px;
+        font-size: 13px;
+        border-radius: 20px;
+        color: #ffffff !important;
+    }
+
+    #submit {
+        height: 32px;
+        width: 32px;
+        font-size: 13px;
+        right: 5px;
+    }
+
+    .info {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+
+    .dropDown {
+        right: 12px;
+        width: 160px;
+        top: 60px;
+    }
+
+    .dropDownItem {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
 }

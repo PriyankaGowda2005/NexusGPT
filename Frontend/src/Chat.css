@@ -1,34 +1,451 @@
 .chats {
-    max-width: 700px;
-    overflow-y: scroll;
-    padding: 8rem;
+    max-width: 800px;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 40px 24px 120px;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+.chats::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chats::-webkit-scrollbar-thumb {
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-align: center;
+    margin: 60px 0 40px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .userDiv {
     display: flex;
     justify-content: flex-end;
-    font-size: 0.9rem;
+    margin-bottom: 24px;
+    animation: slideInRight 0.4s ease;
 }
 
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
 
 .gptDiv {
     text-align: left;
-    font-size: 0.9rem;
+    margin-bottom: 24px;
+    animation: slideInLeft 0.4s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .userMessage {
-    background-color: #323232;
-    padding: 10px 20px;
-    border-radius: 14px;
-    margin-left: 15rem;
-    max-width: 500px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    padding: 14px 20px;
+    border-radius: 18px 18px 4px 18px;
+    max-width: 85%;
+    width: fit-content;
+    color: var(--text-primary);
+    font-size: 15px;
+    line-height: 1.6;
+    box-shadow: var(--shadow-md);
+    word-wrap: break-word;
+}
+
+.gptDiv {
+    max-width: 85%;
     width: fit-content;
 }
 
+.gptDiv > * {
+    background: var(--bg-secondary);
+    padding: 16px 20px;
+    border-radius: 18px 18px 18px 4px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    color: var(--text-secondary);
+    font-size: 15px;
+    line-height: 1.7;
+    word-wrap: break-word;
+}
+
+.gptDiv p {
+    margin: 0 0 12px 0;
+}
+
+.gptDiv p:last-child {
+    margin-bottom: 0;
+}
+
+.gptDiv h1,
+.gptDiv h2,
+.gptDiv h3,
+.gptDiv h4,
+.gptDiv h5,
+.gptDiv h6 {
+    color: var(--text-primary);
+    margin-top: 16px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.gptDiv h1 {
+    font-size: 24px;
+}
+
+.gptDiv h2 {
+    font-size: 20px;
+}
+
+.gptDiv h3 {
+    font-size: 18px;
+}
+
+.gptDiv ul,
+.gptDiv ol {
+    margin: 12px 0;
+    padding-left: 24px;
+}
+
+.gptDiv li {
+    margin: 6px 0;
+    color: var(--text-secondary);
+}
+
+.gptDiv code {
+    background: var(--bg-tertiary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+}
+
+.gptDiv pre {
+    background: var(--bg-tertiary);
+    padding: 16px;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 16px 0;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.gptDiv pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: var(--text-secondary);
+}
+
+.gptDiv blockquote {
+    border-left: 4px solid var(--accent-primary);
+    padding-left: 16px;
+    margin: 16px 0;
+    color: var(--text-tertiary);
+    font-style: italic;
+}
+
+.gptDiv a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gptDiv a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.gptDiv table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gptDiv th,
+.gptDiv td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.gptDiv th {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.gptDiv strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.gptDiv em {
+    color: var(--text-tertiary);
+}
+
+/* Code highlighting */
 .hljs {
-    border-radius: 14px !important;
+    border-radius: 12px !important;
+    background: #1e1e1e !important;
+    padding: 16px !important;
 }
 
 pre {
     white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Typing indicator */
+.typing-indicator {
+    display: inline-flex;
+    gap: 4px;
+    padding: 8px 0;
+}
+
+.typing-indicator span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    30% {
+        transform: translateY(-10px);
+        opacity: 1;
+    }
+}
+
+/* Tablet Design */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .chats {
+        max-width: 90%;
+        padding: 35px 20px 110px;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin: 50px 0 35px;
+    }
+
+    .userMessage {
+        padding: 13px 18px;
+        font-size: 14px;
+        max-width: 88%;
+    }
+
+    .gptDiv {
+        max-width: 88%;
+    }
+
+    .gptDiv > * {
+        padding: 15px 18px;
+        font-size: 14px;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .chats {
+        max-width: 100%;
+        padding: 30px 16px 100px;
+    }
+
+    h1 {
+        font-size: 26px;
+        margin: 40px 0 30px;
+    }
+
+    .userMessage {
+        padding: 12px 16px;
+        font-size: 14px;
+        max-width: 90%;
+        border-radius: 16px 16px 4px 16px;
+    }
+
+    .gptDiv {
+        max-width: 90%;
+    }
+
+    .gptDiv > * {
+        padding: 14px 16px;
+        font-size: 14px;
+        border-radius: 16px 16px 16px 4px;
+    }
+
+    .gptDiv h1 {
+        font-size: 20px;
+    }
+
+    .gptDiv h2 {
+        font-size: 18px;
+    }
+
+    .gptDiv h3 {
+        font-size: 16px;
+    }
+
+    .gptDiv code {
+        font-size: 13px;
+        padding: 2px 5px;
+    }
+
+    .gptDiv pre {
+        padding: 12px;
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chats {
+        padding: 20px 12px 90px;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin: 30px 0 20px;
+    }
+
+    h1 i {
+        font-size: 24px !important;
+        margin-right: 8px !important;
+    }
+
+    .userDiv {
+        margin-bottom: 16px;
+    }
+
+    .gptDiv {
+        margin-bottom: 16px;
+    }
+
+    .userMessage {
+        padding: 10px 14px;
+        font-size: 13px;
+        max-width: 95%;
+        border-radius: 14px 14px 4px 14px;
+    }
+
+    .gptDiv {
+        max-width: 95%;
+    }
+
+    .gptDiv > * {
+        padding: 12px 14px;
+        font-size: 13px;
+        border-radius: 14px 14px 14px 4px;
+    }
+
+    .gptDiv h1 {
+        font-size: 18px;
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+
+    .gptDiv h2 {
+        font-size: 16px;
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+
+    .gptDiv h3 {
+        font-size: 15px;
+        margin-top: 12px;
+        margin-bottom: 10px;
+    }
+
+    .gptDiv p {
+        margin: 0 0 10px 0;
+    }
+
+    .gptDiv ul,
+    .gptDiv ol {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+
+    .gptDiv li {
+        margin: 4px 0;
+    }
+
+    .gptDiv code {
+        font-size: 12px;
+        padding: 1px 4px;
+    }
+
+    .gptDiv pre {
+        padding: 10px;
+        border-radius: 8px;
+        margin: 12px 0;
+    }
+
+    .gptDiv blockquote {
+        padding-left: 12px;
+        margin: 12px 0;
+    }
+
+    .gptDiv table {
+        font-size: 12px;
+    }
+
+    .gptDiv th,
+    .gptDiv td {
+        padding: 8px;
+    }
 }

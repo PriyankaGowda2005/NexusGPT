@@ -1,5 +1,5 @@
 import "./Chat.css";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { MyContext } from "./MyContext";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
@@ -8,6 +8,7 @@ import "highlight.js/styles/github-dark.css";
 function Chat() {
     const {newChat, prevChats, reply} = useContext(MyContext);
     const [latestReply, setLatestReply] = useState(null);
+    const chatsEndRef = useRef(null);
 
     useEffect(() => {
         if(reply === null) {
@@ -29,11 +30,32 @@ function Chat() {
 
         return () => clearInterval(interval);
 
-    }, [prevChats, reply])
+    }, [prevChats, reply]);
+
+    // Auto-scroll to bottom when new messages arrive
+    useEffect(() => {
+        chatsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [prevChats, latestReply]);
 
     return (
         <>
-            {newChat && <h1>Start a New Chat!</h1>}
+            {newChat && (
+                <div style={{ textAlign: 'center', padding: '40px 24px' }}>
+                    <h1>
+                        <i className="fa-solid fa-sparkles" style={{ marginRight: '12px', fontSize: '32px' }}></i>
+                        Start a New Chat!
+                    </h1>
+                    <p style={{ 
+                        color: 'var(--text-tertiary)', 
+                        fontSize: '15px', 
+                        marginTop: '12px',
+                        maxWidth: '600px',
+                        margin: '12px auto 0'
+                    }}>
+                        Ask me anything and I'll help you with thoughtful, detailed responses.
+                    </p>
+                </div>
+            )}
             <div className="chats">
                 {
                     prevChats?.slice(0, -1).map((chat, idx) => 
@@ -66,6 +88,7 @@ function Chat() {
                     )
                 }
 
+                <div ref={chatsEndRef} />
             </div>
         </>
     )
